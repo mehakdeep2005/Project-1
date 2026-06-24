@@ -851,8 +851,28 @@
                 submitBtn.disabled = false;
             }
         });
+        function renderMenu() {
+            for (const category in menuData) {
+                const grid = document.getElementById(`${category}-grid`);
+                if (!grid) continue;
 
-        renderMenu();
+                grid.innerHTML = menuData[category].map(item => `
+                    <div class="food-item-card bg-image" style="background-image: url('${item.background}')">
+                        <div class="item-details">
+                            <h4>${item.name}</h4>
+                            <span class="item-price">₹${item.price}</span>
+                        </div>
+                        <div class="item-meta">
+                            <button class="btn-add" onclick="addToCart('${item.name}', ${item.price})">Add +</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // This line is already at the bottom of your file, keep it right after the new code
+        renderMenu(); 
     </script>
 </body>
 </html>
+   
